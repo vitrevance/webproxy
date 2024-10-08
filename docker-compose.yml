@@ -1,11 +1,13 @@
 services:
   ultraviolet:
-    image: diffusehyperion/ultraviolet
-    container_name: ultraviolet
+    image: webproxy
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: webproxy-ultraviolet
     restart: unless-stopped
+    environment:
+      - SOCKS_HOST=1.1.1.1
+      - SOCKS_PORT=1080
     ports:
-      - "8080:8080"
-    
-networks:
-  default:
-    name: ultraviolet
+      - "30080:8080"
